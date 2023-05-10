@@ -1,6 +1,6 @@
 from services.config import *
 
-'''  Funções relacionadas á database '''
+f'''  Funções relacionadas à database '''
 
 def db_query_all(schema:object) -> list:
     ''' Retorna uma lista com todos 
