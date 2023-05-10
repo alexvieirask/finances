@@ -1,6 +1,5 @@
 from services.config import *
 
-
 ''' TYPE SAIDA E ENTRADA '''
 class Transaction(db.Model):
     __tablename__ = "Transaction"
