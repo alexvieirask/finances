@@ -1,0 +1,11 @@
+## Python
+__pycache__/
+venv/
+
+## Databases
+instance/
+*.sqlite
+*.db
+
+## Logs
+*.log
