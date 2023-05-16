@@ -7,7 +7,7 @@ class Transaction(db.Model):
     amount = db.Column(db.Integer, nullable = False)
     type = db.Column(db.Integer, nullable = False)
     name = db.Column(db.Text, nullable = False)
-    register_date = db.Column(db.DateTime, default= datetime.utcnow())
+    register_date = db.Column(db.DateTime, default= datetime.now(BR_TZ))
 
     ''' Relacionamentos '''
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'), nullable = False)
@@ -21,6 +21,20 @@ class Transaction(db.Model):
         self.name = name
         self.category_id = category_id
         self.account_id = account_id
+    
+    def create(amount:int, type:int, name:str, category_id:int, account_id:int):
+        try:
+            new_transaction = Transaction(
+                amount, 
+                type, 
+                name,
+                category_id,
+                account_id
+            )
+            db.session.add(new_transaction)
+            db.session.commit()
+        finally:
+            db.session.close()
 
     def to_dict(self):
         dict = {
@@ -32,5 +46,4 @@ class Transaction(db.Model):
             "category_id"      :       self.category_id,
             "account_id"       :       self.account_id
         }
-        
         return dict

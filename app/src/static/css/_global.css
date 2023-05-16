@@ -1,0 +1,34 @@
+.form-span-error{
+    color: red;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    margin-left: 1%;
+}
+
+.form-span-success{
+    color: green;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    margin-left: 1%;
+}
+
+#loading-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    animation: spin 1s infinite linear;
+    display: none;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

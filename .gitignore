@@ -7,5 +7,7 @@ instance/
 *.sqlite
 *.db
 
+_secrets.py
+
 ## Logs
 *.log

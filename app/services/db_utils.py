@@ -42,9 +42,20 @@ def db_delete_many_objects(list:list):
         db.session.delete(item)
     db.session.commit()
 
+def db_check_if_useremail_exists(schema,username):
+    ''' Verifica se um usuario com o email infomado existe '''
+    user = db_query_by_email(schema,username)
+    if user:
+        return True
+    return False
+
 def db_check_if_username_exists(schema,username):
     ''' Verifica se um username já existe '''
     user = db_query_by_username(schema,username)
     if user:
         return True
     return False
+
+
+def db_query_token_by_token(schema:object,token:str) -> object:
+    return schema.query.filter_by(token=token).first()

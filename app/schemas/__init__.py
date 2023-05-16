@@ -1,1 +1,1 @@
-__all__ = ['category','transaction','account', 'user']
+__all__ = ['category','transaction','account', 'user','token_reset_password']
