@@ -56,6 +56,5 @@ def db_check_if_username_exists(schema,username):
         return True
     return False
 
-
 def db_query_token_by_token(schema:object,token:str) -> object:
     return schema.query.filter_by(token=token).first()

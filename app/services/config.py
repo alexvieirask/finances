@@ -5,13 +5,13 @@ import random
 import platform
 import pytz
 
-
-''' Importações Flask SQLALCHEMY '''
-from flask import Flask, render_template,jsonify, request, redirect, url_for, abort
+''' Importações Flask  '''
+from flask import Flask, render_template,jsonify, request, redirect, url_for, abort,send_file, make_response,send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt,generate_password_hash,check_password_hash
+from flask_caching import Cache, CachedResponse
 from flask_mail import Mail, Message
 from sqlalchemy.exc import IntegrityError
 
@@ -35,6 +35,10 @@ app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
+
+app.config['CACHE_TYPE'] = 'SimpleCache'  
+app.config['CACHE_DEFAULT_TIMEOUT'] = 3600 
+cache = Cache(app)
 
 db = SQLAlchemy(app)
 

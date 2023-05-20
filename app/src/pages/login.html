@@ -1,11 +1,11 @@
 {% extends "utils/_utils.templates.html" %}
     {% block head %}
         <title>Finances</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+        <link rel="stylesheet" href="/css/login.css">
     {% endblock %}
 
     {% block body %}
-        <main>
+        <main id="main-login">
             <div id="logreg-forms">
             <form class="form-signin">
                 <h1 class="h4 mb-3 font-weight-bold" style="text-align: center">Sign in</h1>
@@ -53,5 +53,5 @@
     {% endblock %}
 
     {% block scripts %}
-        <script type="module" src="{{ url_for('static', filename='js/login.js')}}"></script>
+        <script type="module" src="/js/login.js"></script>
     {% endblock %}

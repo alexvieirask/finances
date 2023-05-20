@@ -99,6 +99,7 @@ async function handleSignin(event){
     });
 
     const responseData = await response.json()
+
     removeErrorMessage()
 
     var HTML_FORM_CONTAINER = document.querySelector(".items-input-signin")
@@ -108,6 +109,9 @@ async function handleSignin(event){
         HTML_SPAN.classList.add("form-span-error")
         HTML_SPAN.textContent = responseData.details
         HTML_FORM_CONTAINER.appendChild(HTML_SPAN)
+    } else{
+        window.location = '/home'
+        sessionStorage.setItem("JWT",responseData.details)
     }
 
 }

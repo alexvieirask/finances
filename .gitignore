@@ -11,3 +11,6 @@ _secrets.py
 
 ## Logs
 *.log
+
+# Dev
+.env
