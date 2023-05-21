@@ -15,11 +15,8 @@ from flask_mail import Mail, Message
 ''' Importações .env '''
 from services.env import *
 
-
-
-''' Configurações Flask SQLALCHEMY '''
+''' Configurações Flask'''
 app = Flask(__name__, template_folder='../src', static_folder='../src/static')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 ''' Configurações Servidor de E-mail '''
 app.config['MAIL_SERVER']='smtp.gmail.com'

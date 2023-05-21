@@ -11,16 +11,23 @@
         <link rel="stylesheet" href="/css/__global.css">
         <script src="/js/__jquery.min.js"></script>
         <script src="/js/__toastr.min.js"></script>
+
         {% block head %}
         
         {% endblock %}
     </head> 
     <body>
+        <header  class="bg-primary text-white py-3 px-5">
+            <div class=" d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">Finances</h1>
+                <span class="font-weight-bold" id="header-username-span"></span>
+            </div>
+        </header>
         {% block body %} 
         
         {% endblock %}
 
-   
+        <script type="module" src="/js/__header.config.js"></script>
         {% block scripts %}
            
         {% endblock %}

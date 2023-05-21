@@ -1,4 +1,4 @@
-import *  as __global from "./__global.js"
+import *  as __global from "./__utils.global.js"
 
 const { ENDERECO_IP, JWT, Toastr } = __global
 
@@ -191,7 +191,6 @@ async function handleRedefinePassword(event){
         HTML_FORM_CONTAINER.insertAdjacentElement('afterend',HTML_SUBMIT_NEW_PASSWORD)
        
     }
-
     button.disabled = false
 }
 

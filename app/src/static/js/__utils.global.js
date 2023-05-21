@@ -1,6 +1,5 @@
-import * as _utilsServerConfig from './utils.server.config.js'
-import * as Toastr from './utils.toastr.js'
-import * as Loading from './utils.loading.js'
+import * as _utilsServerConfig from './__utils.server.config.js'
+import * as Toastr from './__utils.toastr.js'
 
 var { handleAdressIP } = _utilsServerConfig
 
@@ -29,6 +28,8 @@ async function handleSearchUserInfo(){
             
             return responseServer.json()
         }
+    } else{
+       caches.delete('my-cache')
     }
 }
 
@@ -36,4 +37,4 @@ var CURRENT_USER = await handleSearchUserInfo()
 
 console.log("CURRENT_USER:",CURRENT_USER)
 
-export { ENDERECO_IP, JWT, Toastr, Loading, CURRENT_USER }
+export { ENDERECO_IP, JWT, Toastr, CURRENT_USER }
