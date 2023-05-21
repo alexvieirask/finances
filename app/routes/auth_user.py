@@ -75,9 +75,9 @@ def forgout_password():
                 msg.html = render_template("utils/_utils.body_email.html", token=token)
                 
                 mail.send(msg)
-                response = jsonify({"status":200, "details":'Um e-mail com instruções para redefinir sua senha foi enviado para o seu endereço de e-mail.'})
+                response = jsonify({"status":200, "details":"Password reset email has been sent to your email address."})
             else:
-                response =  jsonify({"status":552, "details":"nao possui email no sistema "})
+                response =  jsonify({"status":552, "details":"There is no email address registered in the system."})
         else:
             response = jsonify({"status":250, "details":"Required fields empty."})    
     except Exception as error:
