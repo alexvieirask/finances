@@ -1,33 +1,27 @@
 ''' Importações extras '''
 from datetime import datetime, timedelta
-import os
-import random
-import platform
-import pytz
+import string, platform, random, os
+
+''' Importações postgres '''
+import psycopg2
 
 ''' Importações Flask  '''
 from flask import Flask, render_template,jsonify, request, redirect, url_for, abort,send_file, make_response,send_from_directory
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt,generate_password_hash,check_password_hash
 from flask_caching import Cache, CachedResponse
 from flask_mail import Mail, Message
-from sqlalchemy.exc import IntegrityError
 
-from _secrets import *
+''' Importações .env '''
+from services.env import *
 
-''' Configuração do timezone utilizado '''
-BR_TZ = pytz.timezone('America/Sao_Paulo')
 
-''' Configuração do nome do arquivo da database  '''
-DATABASE_FILENAME = 'database.db'
 
 ''' Configurações Flask SQLALCHEMY '''
 app = Flask(__name__, template_folder='../src', static_folder='../src/static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DATABASE_FILENAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+''' Configurações Servidor de E-mail '''
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = MAIL_USERNAME
@@ -36,15 +30,10 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
+''' Configurações de Cache '''
 app.config['CACHE_TYPE'] = 'SimpleCache'  
 app.config['CACHE_DEFAULT_TIMEOUT'] = 3600 
 cache = Cache(app)
-
-db = SQLAlchemy(app)
-
-''' Liberação das Foreing Keys '''
-with app.app_context():
-    db.session.execute(text('PRAGMA FOREIGN_KEYS=ON'))
 
 ''' Importações JWT '''
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
@@ -56,14 +45,13 @@ jwt = JWTManager(app)
 cors = CORS(app)
 bcrypt = Bcrypt(app) 
 
-''' Importações Esquemas '''
-from schemas.user                 import User
-from schemas.account              import Account
-from schemas.transaction          import Transaction
-from schemas.category             import Category
-from schemas.token_reset_password import TokenResetPassword
+''' Importações Schemas '''
+from schemas.postgres import DB_Postgres, SYS_Postgres
+from schemas.user import DB_User, SYS_USER
+from schemas.tokenrp import DB_TokenRP, SYS_TokenRP
 
-''' Criação do banco de dados '''
+''' Lista de tabelas do banco de dados '''
+TABLE_LIST = [ 'User','Account','Category','TokenResetPassword','Transaction']
+
 with app.app_context():
-    if not os.path.exists(DATABASE_FILENAME):
-        db.create_all()
+    DB_Postgres.create_tables()

@@ -9,7 +9,6 @@ def serve_js(filename):
 
         if not os.path.isfile(filepath):
             return "Arquivo não encontrado", 404
-
     
         cache_timeout = 604800  
         response = make_response(send_from_directory(js_dir, filename))
@@ -18,7 +17,7 @@ def serve_js(filename):
         return response
 
     except Exception as error:
-        response = jsonify({"result": "error", "details": str(error)})
+        response = jsonify({"status": 777, "details": str(error)})
         return response
 
 @app.route('/css/<path:filename>')
@@ -34,7 +33,6 @@ def serve_css(filename):
         cache_timeout = 604800  
         response = make_response(send_from_directory(css_dir, filename))
         response.headers['Cache-Control'] = f"public, max-age={cache_timeout}"
-
         return response
 
     except Exception as error:

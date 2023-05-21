@@ -118,6 +118,9 @@ async function handleSignin(event){
 
 async function handleRedefinePassword(event){
     event.preventDefault()
+    var button = document.querySelector("#submit-reset")
+    button.disabled = true
+    
 
     let userEmail = document.getElementById("resetEmail").value 
 
@@ -188,6 +191,8 @@ async function handleRedefinePassword(event){
         HTML_FORM_CONTAINER.insertAdjacentElement('afterend',HTML_SUBMIT_NEW_PASSWORD)
        
     }
+
+    button.disabled = false
 }
 
 

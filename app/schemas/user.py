@@ -1,66 +1,98 @@
 from services.config import *
-from services.db_utils import *
 
-class User(db.Model):
-    __tablename__ = 'User' 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    fullname = db.Column(db.Text(80), nullable=False)
-    username = db.Column(db.Text(50), unique=True, nullable=False)
-    email = db.Column(db.Text(120), unique=True, nullable=False)
-    password_hash = db.Column(db.Text, nullable=False)
-    register_date = db.Column(db.DateTime, nullable=False, default=datetime.now(BR_TZ))
-
-    ''' Relacionamentos '''
-    accounts = db.relationship("Account", backref = "User", lazy = False)
-    tokens = db.relationship("TokenResetPassword", backref = "User", lazy = False)
-    
-    def __init__(self, fullname, username, email, password_hash):
-        self.fullname = fullname
-        self.username = username
-        self.email = email
-        self.password_hash = password_hash
-
-    def create(fullname:str, username:str, email:str, password_hash:str):
+class DB_User():
+    def get_record_by_email(email:str):
         try:
-            new_user = User(
-                fullname, 
-                username, 
-                email,
-                password_hash
-            )
-            db.session.add(new_user)
-            db.session.commit()
-        
-        except Exception as error:
-            return str(error)
-        
+            connection = connect_database()
+            cur = connection.cursor()
+
+            Q_select_by_email = '''SELECT * FROM "public"."User" WHERE email = %s'''
+            
+            cur.execute(Q_select_by_email,(email,))
+            
+            record = cur.fetchone()
+            
+            if record:
+                record_to_dict = SYS_Postgres.record_to_dict(record,cur)
+                return record_to_dict
+            
+            cur.close()
+            return None
         finally:
-            db.session.close()
-
-    def to_dict(self):
-        dict = {
-            'id'                :       self.id,
-            'fullname'          :       self.fullname,
-            'username'          :       self.username,
-            'email'             :       self.email,
-            'password_hash'     :       self.password_hash,
-            'register_date'     :       self.register_date,
-            'accounts'          :       self.accounts
-        }
-        return dict
+            connection.close()
     
-    def list_tokens_in_dict(self):
-        list_tokens_in_dict = []
+    def get_record_by_username(username:str):
+        try:
+            connection = connect_database()
+            cur = connection.cursor()
 
-        for token in self.tokens:
-            list_tokens_in_dict.append(token.to_dict())
-        return list_tokens_in_dict
-    
+            Q_select_by_username = '''SELECT * FROM "public"."User" WHERE username = %s'''
+
+            cur.execute(Q_select_by_username,(username,))
+
+            record = cur.fetchone()
+
+            if record:
+                record_to_dict = SYS_Postgres.record_to_dict(record,cur)
+                return record_to_dict
+            
+            cur.close()
+            return None
+        finally:
+            connection.close()
+
+    def insert_record(fullname, username, email, password_hash):
+        try:
+            connection = connect_database()
+            cur = connection.cursor()
+
+            Q_insert_user = '''
+            INSERT INTO "User" (fullname, username, email, password_hash)
+            VALUES (%s, %s, %s, %s)
+            RETURNING id
+            '''
+
+            values = (fullname, username, email, password_hash)
+            cur.execute(Q_insert_user, values)
+            connection.commit()
+
+            inserted_id = cur.fetchone()[0]
+            
+            cur.close()
+            return inserted_id
+        finally:
+            connection.close()
+
+    def update_password_by_id(new_password:str,id:int):
+        try:
+            connection = connect_database()
+            cur = connection.cursor()
+
+            Q_update_password = '''
+            UPDATE User SET password = %s WHERE ID  = %s
+            RETURNING id
+            '''
+ 
+            cur.execute(Q_update_password, (new_password,id))
+            connection.commit()
+
+            inserted_id = cur.fetchone()[0]
+            
+            cur.close()
+            return inserted_id
+        finally:
+            connection.close()
+        
+class SYS_USER():
     def validate_login(email:str,password:str) -> bool:
-        user = db_query_by_email(User, email)
-        if user:
-            password = check_password_hash(user.password_hash,password)
-            if password:
-                return True
-        return False
-    
+        try:
+            user = DB_User.get_record_by_email(email)
+
+            if user:
+                password = check_password_hash(user.hash_password,password)
+                
+                if password:
+                    return True
+            return False
+        except Exception as exception:
+            return jsonify({"status":"777", "details": str(exception)})

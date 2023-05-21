@@ -13,4 +13,4 @@ _secrets.py
 *.log
 
 # Dev
-.env
+env.py

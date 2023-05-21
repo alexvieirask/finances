@@ -34,7 +34,6 @@ async function handleSearchUserInfo(){
 
 var CURRENT_USER = await handleSearchUserInfo()
 
-console.log(CURRENT_USER)
+console.log("CURRENT_USER:",CURRENT_USER)
 
 export { ENDERECO_IP, JWT, Toastr, Loading, CURRENT_USER }
-

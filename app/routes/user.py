@@ -1,16 +1,15 @@
 from services.config import *
-from services.db_utils import * 
-  
+
 @app.route("/user/info")
 @jwt_required()
 @cache.cached(timeout=3600)
 def user_info_route(): 
     try:
         useremail = get_jwt_identity()
-        user = db_query_by_email(User,useremail) 
-        response = jsonify({"result":"ok", "details": user.to_dict()})
+        user = DB_User.get_record_by_email(useremail) 
+        response = jsonify({"status":200, "details": user})
 
     except Exception as error:
-        response = jsonify({"result":"error", "details":str(error)})
+        response = jsonify({"status":777, "details":str(error)})
     
     return response
