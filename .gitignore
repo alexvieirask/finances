@@ -8,7 +8,7 @@ instance/
 *.db
 
 _secrets.py
-
+_commands.py
 ## Logs
 *.log
 

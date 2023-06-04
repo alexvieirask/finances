@@ -15,16 +15,55 @@
         
         {% endblock %}
     </head> 
-    <body>
-        <header class="bg-primary text-white py-3 px-5">
-            <div class=" d-flex justify-content-between align-items-center">
-                <h1 class="mb-0">Finances</h1>
-                <span class="font-weight-bold" id="header-username-span" style="font-size: 1.25em;"></span>
+    <body style="display: none;">
+        <div style="display: flex; flex-direction: column; height: 100%;">
+            <div>
+                <div class="d-flex justify-content-between align-items-center h-100" style="background-color: #5820FF;padding: 1% 2%;color: #fff;">
+                    <span style="font-size: 2.05vw; font-weight: bold;">Finances</span>
+                    <span class="font-weight-bold" id="header-username-span" style="font-size: 1vw;"></span>
+                </div>
             </div>
-        </header>
-        {% block body %} 
-        
-        {% endblock %}
+            <div style="display: flex; flex-grow: 1;">
+                <div style="background-color: #8445FF; min-width: 300px;" >
+                    <ul class="nav flex-column" style="height: 100%; justify-content: space-between;">
+                        <div>
+                            <li id="home-option" class="nav-item options-bar">
+                                <span class="nav-link">Visão Geral</span>
+                            </li>
+                            <li id="account-option" class="nav-item options-bar">
+                                <span class="nav-link">Contas</span>
+                            </li>
+                            <li id="transaction-option" class="nav-item options-bar">
+                                <span class="nav-link">Lançamento Simples</span>
+                            </li>
+                            <li id="accountpayable-option" class="nav-item options-bar">
+                                <span class="nav-link">Contas a Pagar</span>
+                            </li>
+                            <li  id="accountreceivable-option" class="nav-item options-bar">
+                                <span class="nav-link">Contas a Receber</span>
+                            </li>
+                            <li id="rebate-option" class="nav-item options-bar">
+                                <span class="nav-link">Abatimentos</span>
+                            </li>
+                        
+                        </div>
+                        <div style="background-color: #5820FF;">
+                            <li  id="settings-option" class="nav-item options-bar">
+                                <span class="nav-link">Configurações</span>
+                            </li>
+                            <li id="leave-option" class="nav-item options-bar" >
+                                <span class="nav-link">Sair</span>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <main class="py-5 px-5 w-100 d-flex">
+                    {% block body %}
+
+                    {% endblock %}
+                </main>
+            </div>
+        </div>
 
         <script type="module" src="/js/__header.config.js"></script>
         {% block scripts %}

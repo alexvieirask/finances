@@ -8,43 +8,41 @@
         <main id="main-login">
             <div id="logreg-forms">
             <form class="form-signin">
-                <h1 class="h4 mb-3 font-weight-bold" style="text-align: center">Sign in</h1>
+                <h1 class="h4 mb-3 font-weight-bold text-center">Conecte-se</h1>
 
                 <div class="items-input-signin">
-                    <input type="text" id="inputUsername" class="form-control" placeholder="Email Address" autofocus="">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" >
+                    <input type="text" id="inputUsername" class="form-control " placeholder="E-mail" >
+                    <input type="password" id="inputPassword" class="form-control " placeholder="Senha" >
                 </div>
                 
-                <button class="btn btn-success btn-block" type="submit" id="submit-signin"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-                <a href="#" id="forgot_pswd">Forgot password?</a>
+                <button class="btn btn-success btn-block" type="submit" id="submit-signin"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                <a  id="forgot_pswd">Esqueceu a senha?</a>
                 <hr>
-                <!-- <p>Don't have an account!</p>  -->
-                <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+
+                <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Criar Nova Conta</button>
                 </form>
 
                 <form class="form-reset">
-                    <h1 class="h4 mb-3 font-weight-bold" style="text-align: center">Reset</h1>
+                    <h1 class="h4 mb-3 font-weight-bold" style="text-align: center">Resetar</h1>
                     <div id="loading-icon"></div>
                     <div class="items-input-reset">
-                        <input type="email" id="resetEmail" class="form-control" placeholder="Email address"  autofocus="">
+                        <input type="email" id="resetEmail" class="form-control" placeholder="E-mail"  autofocus="">
                     </div>
-                    <button id="submit-reset" class="btn btn-primary btn-block" type="submit">Reset Password</button>
-                    <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+                    <button id="submit-reset" class="btn btn-primary btn-block" type="submit">Resetar Senha</button>
+                    <a  id="cancel_reset"><i class="fas fa-angle-left"></i> Voltar</a>
                 </form>
                 
                 <form  class="form-signup">
                     <div class="items-input">
-                        <h1 class="h4 mb-3 font-weight-bold" style="text-align: center;">Sign up</h1>
-                        <input type="text" id="user-fullname" class="form-control" placeholder="Full name"  autofocus="">
-                        <input type="text" id="user-name" class="form-control" placeholder="Username"  autofocus="">
-                        <input type="email" id="user-email" class="form-control" placeholder="Email Address" required autofocus="">
-                        <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
-                        <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
+                        <h1 class="h4 mb-3 font-weight-bold " style="text-align: center;">Registrar</h1>
+                        <input type="text" id="user-fullname" class="form-control " placeholder="Nome Completo">
+                        <input type="text" id="user-name" class="form-control " placeholder="Usuário">    
+                        <input type="email" id="user-email" class="form-control " placeholder="E-mail" required>
+                        <input type="password" id="user-pass" class="form-control " placeholder="Senha" required>
+                        <input type="password" id="user-repeatpass" class="form-control " placeholder="Confirme a Senha" required>
                     </div>
-                 
-
-                    <button id="submit-signup" class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
-                    <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+                    <button id="submit-signup" class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Registrar</button>
+                    <a  id="cancel_signup"><i class="fas fa-angle-left"></i> Voltar</a>
                 </form>
                 <br>
         </div>
@@ -53,5 +51,5 @@
     {% endblock %}
 
     {% block scripts %}
-        <script type="module" src="/js/login.js"></script>
+        <script type="module" src="/js/pages.login.js"></script>
     {% endblock %}

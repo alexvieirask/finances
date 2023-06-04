@@ -1,21 +1,23 @@
-const CONFIG = {
-    closeButton: true,
-    preventDuplicates: true
-}
+class Toastr{
+    config = {
+        closeButton: true,
+        preventDuplicates: true
+    }
 
-function show(type,message){
-    toastr.options = CONFIG
+    //toastr.options = CONFIGz
+    static show(type,message){
+        if (type === 'success'){
+            toastr.success(message)
+        }
+        if ( type === 'error'){
+            toastr.error(message)
+        }
+        if ( type === 'warning'){
+            toastr.warning(message)
+        }
+    }
     
-    if (type === 'success'){
-        toastr.success(message)
-    }
-    if ( type === 'error'){
-        toastr.error(message)
-    }
-    if ( type === 'warning'){
-        toastr.warning(message)
-    }
 }
 
 
-export { show }
+export { Toastr }

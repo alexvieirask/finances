@@ -1,10 +1,10 @@
 import *  as __global from "./__utils.global.js"
 
-const { ENDERECO_IP, JWT, Toastr } = __global
+const {Session, Toastr,RedirectTo, Form } = __global
 
 function toggleResetPswd(event){
     event.preventDefault();
-    removeErrorMessage()
+    Form.removeErrorMessage()
     defaultResetPasswordContainer()
     resetForms()
 
@@ -14,17 +14,14 @@ function toggleResetPswd(event){
 
 function toggleSignUp(event){
     event.preventDefault();
-    removeErrorMessage()
+    Form.removeErrorMessage()
     resetForms()
 
-    $('#logreg-forms .form-signin').toggle(); // display:block or none
-    $('#logreg-forms .form-signup').toggle(); // display:block or none
+    $('#logreg-forms .form-signin').toggle(); 
+    $('#logreg-forms .form-signup').toggle(); 
 }
 
-function removeErrorMessage(){
-    var spanErrorExists = document.querySelector(".form-span-error")
-    if (spanErrorExists) spanErrorExists.remove()
-}
+
 
 $(()=>{
     $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
@@ -46,13 +43,13 @@ async function handleSignup(event){
     let userPassword = document.getElementById("user-pass").value 
     let userRepeatPassword = document.getElementById("user-repeatpass").value 
 
-    let url = `http://${ENDERECO_IP}:5000/signup/auth`
+    let url = `http://${Session.IP_ADDRESS}:5000/signup/auth`
     
     const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : `Bearer '${JWT}'`
+          'Authorization' : `Bearer '${Session.JWT}'`
         },
         body:  JSON.stringify({
             fullname                :       fullName,
@@ -64,7 +61,7 @@ async function handleSignup(event){
     });
 
     const responseData = await response.json()
-    removeErrorMessage()
+    Form.removeErrorMessage()
 
     var HTML_FORM_CONTAINER = document.querySelector(".items-input")
     var HTML_SPAN = document.createElement("span")
@@ -77,6 +74,9 @@ async function handleSignup(event){
     else{
         Toastr.show('success','Account successfully created.')
         document.querySelector(".form-signup").reset()
+        $('.form-signup').toggle() 
+        $('.form-signin').toggle() 
+        
     }
 }
 
@@ -85,7 +85,7 @@ async function handleSignin(event){
     let userEmail = document.getElementById("inputUsername").value 
     let userPassword = document.getElementById("inputPassword").value 
 
-    let url = `http://${ENDERECO_IP}:5000/signin/auth`
+    let url = `http://${Session.IP_ADDRESS}:5000/signin/auth`
     
     const response = await fetch(url, {
         method: 'POST',
@@ -100,7 +100,7 @@ async function handleSignin(event){
 
     const responseData = await response.json()
 
-    removeErrorMessage()
+    Form.removeErrorMessage()
 
     var HTML_FORM_CONTAINER = document.querySelector(".items-input-signin")
     var HTML_SPAN = document.createElement("span")
@@ -110,8 +110,9 @@ async function handleSignin(event){
         HTML_SPAN.textContent = responseData.details
         HTML_FORM_CONTAINER.appendChild(HTML_SPAN)
     } else{
-        window.location = '/home'
-        sessionStorage.setItem("JWT",responseData.details)
+        Session.JWT = responseData.details
+        await Session.CURRENT_USER()
+        RedirectTo.Home()
     }
 
 }
@@ -124,7 +125,7 @@ async function handleRedefinePassword(event){
 
     let userEmail = document.getElementById("resetEmail").value 
 
-    let url = `http://${ENDERECO_IP}:5000/forgout_password`
+    let url = `http://${Session.IP_ADDRESS}:5000/forgout_password`
 
     const response = await fetch(url, {
         method: 'POST',
@@ -137,7 +138,7 @@ async function handleRedefinePassword(event){
     });
 
     const responseData = await response.json()
-    removeErrorMessage()
+    Form.removeErrorMessage()
     
     var HTML_FORM_CONTAINER = document.querySelector(".items-input-reset")
     var HTML_SPAN = document.createElement("span")
@@ -204,7 +205,7 @@ async function handleChangePassword(event){
     let userResetPasswordRepeatNewPassword =  document.querySelector("#reset-password-input-new-password-repeat").value
 
 
-    let url = `http://${ENDERECO_IP}:5000/redefine_password`
+    let url = `http://${Session.IP_ADDRESS}:5000/redefine_password`
 
     const response = await fetch(url, {
         method: 'POST',
@@ -220,7 +221,7 @@ async function handleChangePassword(event){
     });
 
     const responseData = await response.json()
-    removeErrorMessage()
+    Form.removeErrorMessage()
     var HTML_FORM_CONTAINER = document.querySelector(".items-input-reset")
     var HTML_SPAN = document.createElement("span")
     

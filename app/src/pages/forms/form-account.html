@@ -1,0 +1,30 @@
+{% extends "utils/_utils.templates_with_header.html" %}
+    {% block head %}
+        <title>Finances - Cadastro de Conta</title>
+    {% endblock %}
+
+    {% block body %}
+        <div style="flex-grow: 1; display: flex; flex-direction: column;">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h1 class="font-weight-bold">Cadastro de Conta</h1>
+                <img class="icon-return-page" id="icon" height="30" width="30" src="{{ url_for('static', filename='img/arrow-back.png') }}" alt="icone-return">
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="d-flex" style="flex-grow: 1;" >
+                <form id="form-new-account" class="w-50">
+                    <div class="items-input">
+                            <input name="account-name" type="text" id="account-name" class="form-control" placeholder="Nome" autofocus>
+                            <input inputmode="numeric" type="text" name="account-initial-value" id="account-initial-value" class="form-control" placeholder="Saldo inicial (00.00 R$)" autofocus>
+                    </div>
+                    <button id="add-new-account" type="submit" class="btn w-100">Adicionar</button>
+                </form>
+
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+        <script type="module" src="/js/pages.form.account.js"></script>
+    {% endblock %}

@@ -1,3 +1,4 @@
+''' Importação das configurações e serviços '''
 from services.config import *
 
 class DB_TokenRP():
@@ -17,11 +18,14 @@ class DB_TokenRP():
                 return record_to_dict
             
             cur.close()
-            return None
+            SYS_Postgres.log_transaction("get_record_by_token")
+       
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("get_record_by_token",error)
         finally:
-            connection.close()  
+            connection.close()
 
-    def insert_record(user_id:str, token:str):
+    def insert_record(user_id:int, token:str):
         try:
             connection = connect_database()
             cur = connection.cursor()
@@ -38,8 +42,12 @@ class DB_TokenRP():
             inserted_id = cur.fetchone()[0]
             
             cur.close()
+            
+            SYS_Postgres.log_transaction("insert_record")
             return inserted_id
-         
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("insert_record",error)
         finally:
             connection.close()
 
@@ -59,7 +67,12 @@ class DB_TokenRP():
             inserted_id = cur.fetchone()[0]
             
             cur.close()
+
+            SYS_Postgres.log_transaction("update_is_valid")
             return inserted_id
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("update_is_valid",error)
         finally:
             connection.close()
 

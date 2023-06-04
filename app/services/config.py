@@ -42,13 +42,27 @@ jwt = JWTManager(app)
 cors = CORS(app)
 bcrypt = Bcrypt(app) 
 
+
+''' Constantes banco de dados '''
+DATABASE_NAME = "wdedyeao"
+DATABASE_TABLES = [
+    'Account',
+    'Category',
+    'TokenResetPassword',
+    'TransactionSimple',
+    'People', 
+    'AccountsPayable',
+    'AccountsReceivable',
+    'TransactionPeriodicity',
+    'User'
+]
+
 ''' Importações Schemas '''
 from schemas.postgres import DB_Postgres, SYS_Postgres
 from schemas.user import DB_User, SYS_USER
 from schemas.tokenrp import DB_TokenRP, SYS_TokenRP
+from schemas.account import DB_Account
 
-''' Lista de tabelas do banco de dados '''
-TABLE_LIST = [ 'User','Account','Category','TokenResetPassword','Transaction']
-
+''' Inicialização banco de dados '''
 with app.app_context():
     DB_Postgres.create_tables()

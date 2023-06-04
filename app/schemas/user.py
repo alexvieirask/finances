@@ -1,3 +1,4 @@
+''' Importação das configurações e serviços '''
 from services.config import *
 
 class DB_User():
@@ -17,7 +18,11 @@ class DB_User():
                 return record_to_dict
             
             cur.close()
-            return None
+            
+            SYS_Postgres.log_transaction("get_record_by_email")
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("get_record_by_email",error)
         finally:
             connection.close()
     
@@ -37,9 +42,44 @@ class DB_User():
                 return record_to_dict
             
             cur.close()
+            
+            SYS_Postgres.log_transaction("get_record_by_username")
             return None
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("get_record_by_username",error)
         finally:
             connection.close()
+
+    def get_accounts_by_user_id(user_id:int,limit:int=0):
+        try:
+            connection = connect_database()
+            cur = connection.cursor()
+
+            Q_select_by_id = '''
+            SELECT acc.amount, acc.name AS account_name FROM "public"."User" AS usu
+            INNER JOIN "public"."Account" AS acc ON acc.user_id = usu.id
+            WHERE usu.id = %s 
+            ORDER BY acc.register_date DESC
+            '''
+
+            if limit > 0:
+                Q_select_by_id += ''' LIMIT {}'''.format(str(limit))
+
+            cur.execute(Q_select_by_id,(user_id,))
+
+            records = cur.fetchall()
+            cur.close()
+            
+            SYS_Postgres.log_transaction("get_accounts_by_user_id")
+            return SYS_Postgres.records_to_dict(records,cur)
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("get_accounts_by_user_id",error)
+        finally:
+            connection.close()
+
+
 
     def insert_record(fullname, username, email, password_hash):
         try:
@@ -59,7 +99,11 @@ class DB_User():
             inserted_id = cur.fetchone()[0]
             
             cur.close()
+            SYS_Postgres.log_transaction("insert_record")
             return inserted_id
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("insert_record",error)
         finally:
             connection.close()
 
@@ -79,7 +123,11 @@ class DB_User():
             inserted_id = cur.fetchone()[0]
             
             cur.close()
+            SYS_Postgres.log_transaction("update_password_by_id")
             return inserted_id
+        
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("update_password_by_id",error)
         finally:
             connection.close()
         
@@ -87,10 +135,8 @@ class SYS_USER():
     def validate_login(email:str,password:str) -> bool:
         try:
             user = DB_User.get_record_by_email(email)
-
             if user:
-                password = check_password_hash(user.hash_password,password)
-                
+                password = check_password_hash(user["password_hash"],password)
                 if password:
                     return True
             return False
