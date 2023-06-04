@@ -1,15 +1,34 @@
 {% extends "utils/_utils.templates_with_header.html" %}
     {% block head %}
         <title>Finances - Account</title>
-        <link rel="stylesheet" href="/css/account.css">
     {% endblock %}
 
     {% block body %}
-        <div style="flex-grow: 1; display: flex; flex-direction: column;">
-            <h1 class="font-weight-bold">Detalhes das Contas</h1>
+    <main style="flex-grow: 1; display: flex; flex-direction: column;">
+        <div id="loading"><div class="spinner"></div></div>
+        <div class="main-page" style="display: none;">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h1 class="font-weight-bold">Detalhes das Contas</h1>
+                <img class="icon-return-page" id="return-page" height="30" width="30" src="{{ url_for('static', filename='img/arrow-back.png') }}" alt="icone-return">
+            </div>
+            <div><hr></div>
+            <div class="d-flex  justify-content-between" style="flex-grow: 1;" >
+                <div class="py-5 px-5 " style="margin-right: 5px; display: flex; flex-direction: column; ;flex: 1">
+                    <table style="border-top: 1px solid #5820FF;" cellpading="0" cellspacing="0"  class="w-100 table table-striped"  id="all-accounts">
+                        <thead>
+                            <tr>
+                                <th>Contas</th>   
+                            </tr>
+                        </thead>
+                    <tbody id="t-body-all-accounts"></tbody>
+                    </table>
+                </div>
+            </div> 
         </div>
+    </main>
+
     {% endblock %}
 
     {% block scripts %}
-        
-    {% endblock %}
+        <script type="module" src="/js/pages.account.details.js"></script>
+    {% endblock %}      

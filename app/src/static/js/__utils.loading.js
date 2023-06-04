@@ -1,7 +1,7 @@
 class Loading{
     static show(){
         try{
-            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading').style.display = 'flex';
         }
         catch(error){
             console.log(error)

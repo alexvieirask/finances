@@ -7,19 +7,19 @@
     {% block body %}
         <main id="main-login">
             <div id="logreg-forms">
-            <form class="form-signin">
-                <h1 class="h4 mb-3 font-weight-bold text-center">Conecte-se</h1>
+                <form class="form-signin">
+                    <h1 class="h4 mb-3 font-weight-bold text-center">Conecte-se</h1>
 
-                <div class="items-input-signin">
-                    <input type="text" id="inputUsername" class="form-control " placeholder="E-mail" >
-                    <input type="password" id="inputPassword" class="form-control " placeholder="Senha" >
-                </div>
-                
-                <button class="btn btn-success btn-block" type="submit" id="submit-signin"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-                <a  id="forgot_pswd">Esqueceu a senha?</a>
-                <hr>
+                    <div class="items-input-signin">
+                        <input type="text" id="inputEmail" class="form-control " placeholder="E-mail" >
+                        <input type="password" id="inputPassword" class="form-control " placeholder="Senha" >
+                    </div>
+                    
+                    <button class="btn btn-success btn-block" type="submit" id="submit-signin"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    <a  id="forgot_pswd">Esqueceu a senha?</a>
+                    <hr>
 
-                <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Criar Nova Conta</button>
+                    <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Criar Nova Conta</button>
                 </form>
 
                 <form class="form-reset">
@@ -45,7 +45,7 @@
                     <a  id="cancel_signup"><i class="fas fa-angle-left"></i> Voltar</a>
                 </form>
                 <br>
-        </div>
+            </div>
         </main>
         
     {% endblock %}

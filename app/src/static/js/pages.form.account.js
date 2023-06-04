@@ -22,7 +22,7 @@ async function handleNewAccount(event){
             },
             body:  JSON.stringify({
                 account_name        :       document.getElementById("account-name").value,
-                opening_balance     :       MathConversions.convertMoneyFloatToInteger(document.getElementById("account-initial-value").value)
+                opening_balance     :       MathConversions.convertMoneyFloatToInteger(document.getElementById("account-initial-value").value).toString()
             })
         });
     

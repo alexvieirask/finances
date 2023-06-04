@@ -15,46 +15,70 @@ class Session{
         return sessionStorage.getItem("JWT")
     }
 
-    static get USER(){
-        return JSON.parse(sessionStorage.getItem("user")) 
+
+    static get listLocalStorage(){
+        const keys = [];
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            keys.push(key);
+        }
+        return keys;
+    }
+
+    static get listSessionStorage(){
+        const keys = [];
+
+        for (let i = 0; i < sessionStorage.length; i++) {
+            const key = sessionStorage.key(i);
+            keys.push(key);
+        }
+        return keys;
     }
 
     static set JWT(value){
         sessionStorage.setItem("JWT",value)
     }
 
-    static set USER(value){
-        sessionStorage.setItem("user",value)
+    static get USER(){
+        return new Promise(async (resolve, reject) => {
+            try {
+              const user = await Session.CURRENT_USER();
+              resolve(user);
+            } catch (error) {
+              reject(error);
+            }
+          });
     }
+
 
     static async CURRENT_USER(){
         if (Session.JWT){
-            var user = sessionStorage.getItem("user")
-            if (!user || Object.keys(user).length === 0) {
-                const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/user/info`;
+            const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/user/info`;
                 
-                let response = await fetch(URL_REQUEST, {
-                  method: 'GET',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Session.JWT}`
-                  }
-                });
-              
-                user = await response.json();
+            let response = await fetch(URL_REQUEST, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Session.JWT}`
+                }
+            });
+            
+            const responseData = await response.json();
 
-                sessionStorage.setItem("user", JSON.stringify(user.details));
-                return user.details;
-            } 
-            else {
-                return JSON.parse(user)
-            }
+            return responseData.details;
         }
     }
 
     static destroy(){
-        sessionStorage.removeItem("JWT")
-        sessionStorage.removeItem("user")
+        Session.listSessionStorage.forEach(item=>{
+            sessionStorage.removeItem(item)
+        })
+
+        Session.listLocalStorage.forEach(item=>{
+            localStorage.removeItem(item)
+        })
+
         RedirectTo.Login()
     }
 

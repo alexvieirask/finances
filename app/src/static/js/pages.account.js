@@ -1,13 +1,12 @@
 import *  as __global from "./__utils.global.js"
 
-const { RedirectTo, Session, MathConversions } = __global
+const { RedirectTo, Session, MathConversions, Loading } = __global
 const { convertMoneyIntegerToFloat } = MathConversions
 
 document.querySelector("#button-new-account").addEventListener("click",RedirectTo.FormAccount)
 document.querySelector("#btn-more-details").addEventListener("click",RedirectTo.AccountDetails)
 
-createTableAccounts()
-createTableMaxAmount()
+createTables()
 
 async function handleGetAccounts(){
     try{
@@ -102,4 +101,12 @@ async function createTableMaxAmount(){
     finally{
         Tbody.innerHTML = table
     }
+}
+
+async function createTables(){
+    Loading.show()
+    await createTableAccounts()
+    await createTableMaxAmount()
+    Loading.hide()
+    document.querySelector(".main-page").style.display = 'block'
 }

@@ -8,15 +8,13 @@ def form_new_account():
     try:
         useremail = get_jwt_identity()
         user = DB_User.get_record_by_email(useremail) 
-
         fields = request.get_json()
 
-        print(fields)
-
         if not fields_empty(fields):
-            account_exists = DB_Account.get_record_by_name(fields["account_name"])
+            account_exists = DB_Account.get_record_by_name(fields["account_name"], user["id"])
+
             if not account_exists:
-                opening_balance = int(fields["opening_balance"])
+                opening_balance = int(fields["opening_balance"]) 
 
                 DB_Account.insert_record(
                     fields["account_name"],

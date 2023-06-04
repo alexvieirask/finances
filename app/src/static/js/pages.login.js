@@ -86,6 +86,8 @@ async function handleSignup(event){
 async function handleSignin(event){
     try{
         event.preventDefault()
+        var button = document.querySelector("#submit-signin")
+        button.disabled = true
         const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/signin/auth`
         
         let response = await fetch(URL_REQUEST, {
@@ -94,7 +96,7 @@ async function handleSignin(event){
               'Content-Type': 'application/json',
             },
             body:  JSON.stringify({
-                useremail               :       document.getElementById("inputUsername").value,
+                useremail               :       document.getElementById("inputEmail").value,
                 userpassword            :       document.getElementById("inputPassword").value,
             })
         });
@@ -115,6 +117,7 @@ async function handleSignin(event){
             await Session.CURRENT_USER()
             RedirectTo.Home()
         }
+        button.disabled = false
     }
     catch(error){
         console.log(error)
@@ -146,7 +149,7 @@ async function handleRedefinePassword(event) {
         var HTML_SPAN = document.createElement("span");
 
         var textEmail = document.getElementById("resetEmail").value
-        console.log(textEmail)
+
       
         if (responseData.status != 200) {
           HTML_SPAN.classList.add("form-span-error");

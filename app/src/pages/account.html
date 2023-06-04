@@ -5,7 +5,7 @@
     {% endblock %}
 
     {% block body %}
-        <div style="flex-grow: 1; display: flex; flex-direction: column;">
+        <main style="flex-grow: 1; display: flex; flex-direction: column;">
             <div id="loading">
                 <div class="spinner"></div>
             </div>
@@ -17,18 +17,19 @@
                         <div>
                             <hr>
                         </div>
-                        <div style="min-height: 300px;">
-                            <table  id="table-accounts" style="min-height: 300px;">
+                        <div style="min-height: 250px;">
+                            <table  id="table-accounts">
                                 <thead>
                                     <th style="width: 50%;">Nome</th>
                                     <th style="width:50%";>Saldo Atual</th>
                                 </thead>
                                 <tbody id="t-body-accounts"></tbody>
                             </table>
-                            <div style="margin-top: 15px;">
-                                <p><strong>Obs.:</strong> O Limite de contas exibidas são cinco.</p>
-                            </div> 
+                            
                         </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Obs.:</strong> O limite de contas exibidas são cinco.</p>
+                        </div> 
                         <div>
                             <hr>
                         </div>
@@ -63,8 +64,7 @@
                     <button id="button-new-account" class="btn w-100">Nova Conta</button>
                 </div>
             </div>
-
-        </div>
+        </main>
     {% endblock %}
 
     {% block scripts %}

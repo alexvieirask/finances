@@ -2,14 +2,14 @@
 from services.config import *
 
 class DB_Account():
-    def get_record_by_name(name:str):
+    def get_record_by_name(name:str,id:int):
         try:
             connection = connect_database()
             cur = connection.cursor()
+
+            Q_select_by_name = '''SELECT * FROM "public"."Account" WHERE name = %s AND user_id = %s'''
             
-            Q_select_by_name = '''SELECT * FROM "public"."Account" WHERE name = %s '''
-            
-            cur.execute(Q_select_by_name,(name,))
+            cur.execute(Q_select_by_name,(name,id,))
             
             record = cur.fetchone()
 

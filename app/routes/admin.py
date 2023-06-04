@@ -6,7 +6,7 @@ def return_all_route(class_type):
     try:
         class_type = class_type.title()
     
-        for type in DATABASE_TABLES:
+        for type in DB_Postgres.get_tablenames():
             if type == class_type:
                 records = DB_Postgres.get_all_records(type)
                 response = jsonify({"status":200, "details":records})
@@ -22,7 +22,7 @@ def return_data_route(class_type , id):
     try:
         class_type = class_type.title()
 
-        for type in DATABASE_TABLES:
+        for type in DB_Postgres.get_tablenames():
             if type == class_type:
                 record = DB_Postgres.get_record_by_id(type,id)
                 if record:

@@ -13,7 +13,6 @@ def pages_home():
 def pages_account():
     return render_template("pages/account.html")
 
-
 @app.route("/account/details")
 def pages_account_details():
     return render_template("pages/account_details.html")

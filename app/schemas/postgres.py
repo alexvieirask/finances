@@ -2,7 +2,7 @@
 from services.config import *
 
 class DB_Postgres():
-    def create_tables():
+    def initialize_database_connection():
         try:
             connection = connect_database()
             cur = connection.cursor()
@@ -21,13 +21,14 @@ class DB_Postgres():
                 '''
                 CREATE TABLE IF NOT EXISTS "Account" (
                     id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL UNIQUE,
+                    name TEXT NOT NULL,
                     opening_balance INTEGER NOT NULL,
                     amount INTEGER NOT NULL,
                     register_date TIMESTAMP DEFAULT (current_timestamp),
 
                     user_id INTEGER NOT NULL,
-                    FOREIGN KEY (user_id) REFERENCES "User" (id)
+                    FOREIGN KEY (user_id) REFERENCES "User" (id),
+                     CONSTRAINT account_user_name_unique UNIQUE (user_id, name)
                 )
                 ''',
                 '''
@@ -116,7 +117,8 @@ class DB_Postgres():
                     transaction_id INTEGER NOT NULL,
                     FOREIGN KEY (transaction_id) REFERENCES "TransactionBase" (id) ON DELETE CASCADE
                 )
-                '''
+                '''   
+
             ]
 
             for command in Q_create_tables:
@@ -125,12 +127,52 @@ class DB_Postgres():
             connection.commit()
             cur.close()
             
-            SYS_Postgres.log_transaction("create_tables")
+            SYS_Postgres.log_transaction("initialize_database_connection")
         except psycopg2.Error as error:
-            SYS_Postgres.log_transaction("create_tables",error)
+            SYS_Postgres.log_transaction("initialize_database_connection",error)
         finally:
             connection.close()
     
+    def drop_tables():
+        try:
+            connection = connect_database()
+            cur = connection.cursor()
+
+            for table in DB_Postgres.get_tablenames():
+                Q_drop_table = '''DROP TABLE IF EXISTS "public"."{}" CASCADE'''.format(table)
+                cur.execute(Q_drop_table)
+        
+            cur.close()
+            connection.commit()
+            SYS_Postgres.log_transaction("drop_tables")
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("drop_tables",error)
+        finally:
+            connection.close()
+
+    def get_tablenames():
+        try:
+            connection = connect_database()
+
+            cur = connection.cursor()
+
+            Q_get_tablenames = """SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'public' """
+            cur.execute(Q_get_tablenames)
+
+            records = cur.fetchall()
+
+            records_list = [ record[0] for record in records  ]
+
+            cur.close()
+            SYS_Postgres.log_transaction("get_tablenames")
+
+            return records_list
+        except psycopg2.Error as error:
+            SYS_Postgres.log_transaction("get_tablenames",error)
+        finally:
+            connection.close()
+
+        
     def get_all_records(tablename:str):
         try:
             connection = connect_database()
@@ -224,6 +266,20 @@ class SYS_Postgres:
 
     def log_transaction(transaction,details=200):
         print('''SQL: [ DATETIME: {} | Transaction: {} | status: {} ]'''.format(datetime.now(),transaction,str(details)))
+
+    def get_user_cache(useremail):
+        try:
+            if useremail in user_caches:
+                return user_caches[useremail]
+            
+            user_cache = Cache(app)
+            user_caches[useremail] = user_cache
+            return user_cache
+        except Exception as error:
+            print("get_user_cache", error)
+
+    def clear_pages_cache():
+        cache.clear()
 
     def list_error():
         LIST_ERROR = {

@@ -2,6 +2,7 @@
 from services.config import *
 
 class DB_User():
+    @cache.memoize()
     def get_record_by_email(email:str):
         try:
             connection = connect_database()
@@ -51,7 +52,8 @@ class DB_User():
         finally:
             connection.close()
 
-    def get_accounts_by_user_id(user_id:int,limit:int=0):
+
+    def get_accounts_by_user_id(user_id:int,limit=0):
         try:
             connection = connect_database()
             cur = connection.cursor()

@@ -11,16 +11,21 @@ document.querySelector("#rebate-option").addEventListener("click",RedirectTo.Reb
 document.querySelector("#settings-option").addEventListener("click",RedirectTo.Settings)
 document.querySelector("#leave-option").addEventListener("click",Session.destroy)
 
-function setHeaderData(){
+async function setHeaderData(){
     try{
         if (Session.USER){
-            var headerUsername = document.querySelector("#header-username-span")
-            
-            headerUsername.textContent = `@${Session.USER.username}`
-           
-            var body = document.querySelector("body")
-            
-            body.style.display = 'block'
+            Session.USER.then(user=>{
+                var headerUsername = document.querySelector("#header-username-span")
+                
+                headerUsername.textContent = `@${user.username}`
+               
+                var body = document.querySelector("body")
+                
+                body.style.display = 'block'
+            }).catch(error=>{
+                console.log(error)
+            })
+          
         }
        else{
             if (window.location != '/' ){

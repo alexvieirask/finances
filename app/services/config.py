@@ -28,9 +28,10 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 ''' Configurações de Cache '''
-app.config['CACHE_TYPE'] = 'SimpleCache'  
+app.config['CACHE_TYPE'] = 'simple'  
 app.config['CACHE_DEFAULT_TIMEOUT'] = 3600 
 cache = Cache(app)
+user_caches = {}
 
 ''' Importações JWT '''
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
@@ -42,27 +43,13 @@ jwt = JWTManager(app)
 cors = CORS(app)
 bcrypt = Bcrypt(app) 
 
-
-''' Constantes banco de dados '''
-DATABASE_NAME = "wdedyeao"
-DATABASE_TABLES = [
-    'Account',
-    'Category',
-    'TokenResetPassword',
-    'TransactionSimple',
-    'People', 
-    'AccountsPayable',
-    'AccountsReceivable',
-    'TransactionPeriodicity',
-    'User'
-]
-
 ''' Importações Schemas '''
 from schemas.postgres import DB_Postgres, SYS_Postgres
 from schemas.user import DB_User, SYS_USER
 from schemas.tokenrp import DB_TokenRP, SYS_TokenRP
 from schemas.account import DB_Account
 
+
 ''' Inicialização banco de dados '''
 with app.app_context():
-    DB_Postgres.create_tables()
+    DB_Postgres.initialize_database_connection()

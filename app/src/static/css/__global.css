@@ -5,15 +5,15 @@ html,body{
 }
 
 .form-span-error{
-    color: red;
-    font-weight: 600;
-    font-size: 0.9em;
+  color: red;
+  font-weight: 600;
+  font-size: 0.9em;
 }
 
 .form-span-success{
-    color: green;
-    font-weight: 600;
-    font-size: 0.9em;
+  color: green;
+  font-weight: 600;
+  font-size: 0.9em;
 }
 
 .options-bar{
@@ -42,7 +42,7 @@ body{
   background-color: #413bff;
 }
 
-#icon{
+#return-page{
   cursor: pointer;
 }
 
@@ -51,11 +51,10 @@ button{
   color: #FFFFFF;
   transition: 1s all;
 }
+
 button:hover{
   background-color: #5820FF;
 }
-
-
 button[type="submit"]{ margin-top:10px; }
 
 .form-control{
@@ -88,7 +87,6 @@ button[type="submit"]{ margin-top:10px; }
   animation: spin 1s infinite linear;
 }
 
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -96,4 +94,27 @@ button[type="submit"]{ margin-top:10px; }
   to {
     transform: rotate(360deg);
   }
+}
+
+.square-container {
+  background-color: #e0e0e0;
+  min-height: 500px;
+  min-width: 500px;
+  border-radius: 10px;
+  flex: 1;
+}
+
+.paginate_button.page-item.active .page-link {
+  background-color: #5820FF;
+  box-shadow: none;
+  color: white;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+a:hover{
+  color: black;
+  text-decoration: none;
 }
