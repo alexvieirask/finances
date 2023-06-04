@@ -41,5 +41,4 @@ class RedirectTo{
 
 }
 
-
 export { RedirectTo }

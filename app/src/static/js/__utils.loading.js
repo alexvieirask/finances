@@ -1,10 +1,20 @@
 class Loading{
     static show(){
-        document.getElementById('loading').style.display = 'block';
+        try{
+            document.getElementById('loading').style.display = 'block';
+        }
+        catch(error){
+            console.log(error)
+        }
     }
     
     static hide(){
-        document.getElementById('loading').style.display = 'none';
+        try{
+            document.getElementById('loading').style.display = 'none';
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 }
 

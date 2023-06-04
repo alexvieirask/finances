@@ -1,9 +1,8 @@
 import *  as __global from "./__utils.global.js"
 
-const { RedirectTo, JWT, ENDERECO_IP, MathConversions } = __global
+const { RedirectTo, Session, MathConversions } = __global
 const { convertMoneyIntegerToFloat } = MathConversions
 
-/* Quando inicializado a chamada do JS */
 document.querySelector("#button-new-account").addEventListener("click",RedirectTo.FormAccount)
 document.querySelector("#btn-more-details").addEventListener("click",RedirectTo.AccountDetails)
 
@@ -12,12 +11,12 @@ createTableMaxAmount()
 
 async function handleGetAccounts(){
     try{
-        const URL_REQUEST = `http://${ENDERECO_IP}:5000/user/info/all_accounts?limit=5`
+        const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/user/info/all_accounts?limit=5`
         let response = await fetch(URL_REQUEST, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${JWT}`
+                'Authorization' : `Bearer ${Session.JWT}`
             }
         });      
         return response.json()
@@ -25,17 +24,16 @@ async function handleGetAccounts(){
     catch(error){
         console.log(error)
     }
-
 }
 
 async function handleGetMaxAmount(){
     try{
-        const URL_REQUEST = `http://${ENDERECO_IP}:5000/account/max_amount`
+        const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/account/max_amount`
         let response = await fetch(URL_REQUEST, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${JWT}`
+                'Authorization' : `Bearer ${Session.JWT}`
             }
         });      
         return response.json()
@@ -43,7 +41,6 @@ async function handleGetMaxAmount(){
     catch(error){
         console.log(error)
     }
-  
 }
 
 async function createTableAccounts(){

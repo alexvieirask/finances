@@ -1,6 +1,6 @@
 import *  as __global from "./__utils.global.js"
 
-const { CURRENT_USER, Session, RedirectTo } = __global
+const { Session, RedirectTo } = __global
 
 document.querySelector("#home-option").addEventListener("click",RedirectTo.Home)
 document.querySelector("#account-option").addEventListener("click",RedirectTo.Account)
@@ -12,17 +12,26 @@ document.querySelector("#settings-option").addEventListener("click",RedirectTo.S
 document.querySelector("#leave-option").addEventListener("click",Session.destroy)
 
 function setHeaderData(){
-    if (Session.USER){
-        console.log(Session.USER)
-        var headerUsername = document.querySelector("#header-username-span")
-        headerUsername.textContent = `@${Session.USER.username}`
-        var body = document.querySelector("body")
-        body.style.display = 'block'
-    }
-   else{
-        if (window.location != '/' ){
-            window.location =  '/'
+    try{
+        if (Session.USER){
+            var headerUsername = document.querySelector("#header-username-span")
+            
+            headerUsername.textContent = `@${Session.USER.username}`
+           
+            var body = document.querySelector("body")
+            
+            body.style.display = 'block'
         }
+       else{
+            if (window.location != '/' ){
+                RedirectTo.Login()
+            }
+        }
+
+    }
+    catch(error){
+        console.log(error)
     }
 }
+
 setHeaderData()

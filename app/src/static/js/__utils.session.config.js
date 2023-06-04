@@ -27,13 +27,13 @@ class Session{
         sessionStorage.setItem("user",value)
     }
 
-
     static async CURRENT_USER(){
         if (Session.JWT){
             var user = sessionStorage.getItem("user")
             if (!user || Object.keys(user).length === 0) {
-                var url = `http://${Session.IP_ADDRESS}:5000/user/info`;
-                const response = await fetch(url, {
+                const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/user/info`;
+                
+                let response = await fetch(URL_REQUEST, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json',
@@ -59,8 +59,5 @@ class Session{
     }
 
 }
-
-
-
 
 export { Session }

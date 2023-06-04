@@ -1,10 +1,20 @@
 class MathConversions {
     static convertMoneyIntegerToFloat(value){
-        return (value / 100).toFixed(2)
+        try{
+            return (value / 100).toFixed(2)
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
     static convertMoneyFloatToInteger(value){
-        return value * 100
+        try{
+            return value * 100
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 }
 

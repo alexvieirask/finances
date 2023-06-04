@@ -31,7 +31,7 @@ class DB_TokenRP():
             cur = connection.cursor()
           
             Q_insert_tokenRP = '''
-            INSERT INTO "tokenresetpassword" (user_id, token)
+            INSERT INTO public."TokenResetPassword" (user_id, token)
             VALUES (%s, %s)
             RETURNING id
             '''
