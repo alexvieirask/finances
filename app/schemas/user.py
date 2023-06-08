@@ -59,7 +59,7 @@ class DB_User():
             cur = connection.cursor()
 
             Q_select_by_id = '''
-            SELECT acc.amount, acc.name AS account_name FROM "public"."User" AS usu
+            SELECT acc.id,acc.amount, acc.name AS account_name FROM "public"."User" AS usu
             INNER JOIN "public"."Account" AS acc ON acc.user_id = usu.id
             WHERE usu.id = %s 
             ORDER BY acc.register_date DESC

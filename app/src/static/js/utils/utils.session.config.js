@@ -1,4 +1,4 @@
-import { RedirectTo } from './__utils.redirect.pages.js'
+import { RedirectTo } from './utils.redirect.pages.js'
 
 class Session{
     URL = document.URL;

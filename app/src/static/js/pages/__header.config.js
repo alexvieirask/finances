@@ -1,10 +1,10 @@
-import *  as __global from "./__utils.global.js"
+import *  as __global from "../utils/utils.global.js"
 
 const { Session, RedirectTo } = __global
 
 document.querySelector("#home-option").addEventListener("click",RedirectTo.Home)
 document.querySelector("#account-option").addEventListener("click",RedirectTo.Account)
-document.querySelector("#transaction-option").addEventListener("click",RedirectTo.Transaction)
+document.querySelector("#transaction-option").addEventListener("click",RedirectTo.TransactionSimple)
 document.querySelector("#accountpayable-option").addEventListener("click",RedirectTo.AccountsPayable)
 document.querySelector("#accountreceivable-option").addEventListener("click",RedirectTo.AccountsReceivable)
 document.querySelector("#rebate-option").addEventListener("click",RedirectTo.Rebate)

@@ -41,7 +41,6 @@ def serve_json(filename):
         response = jsonify({"status": 777, "details": str(error)})
         return response
 
-
 @app.route('/css/<path:filename>')
 def serve_css(filename):
     try:

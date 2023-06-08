@@ -4,14 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="module" src="/js/__utils.global.js"></script>
-        <link rel="stylesheet" href="/css/__bootstrap.css">
-        <link rel="stylesheet" href="/css/__toastr.min.css">
-        <link rel="stylesheet" href="/css/__dataTables.css">
-        <link rel="stylesheet" href="/css/__global.css">
-        <script src="/js/__jquery.min.js"></script>
-        <script src="/js/__toastr.min.js"></script>
-        <script src="/js/__dataTables.js"></script>
+        {% include "utils/_utils.scripts.html" %}
+        
         {% block head %}
         
         {% endblock %}
@@ -48,14 +42,25 @@
                             </li>
                         
                         </div>
-                        <div style="background-color: #5820FF;">
-                            <li  id="settings-option" class="nav-item options-bar">
-                                <span class="nav-link">Configurações</span>
-                            </li>
-                            <li id="leave-option" class="nav-item options-bar" >
-                                <span class="nav-link">Sair</span>
-                            </li>
+                        
+                        <div style="height: 30%; display: flex; justify-content: space-between;flex-direction: column;">
+                            <div>
+                                <li class="nav-item options-bar">
+                                    <span style="border-top: 1px solid #FFF;" class="nav-link">Cadastros Gerais</span>
+                                </li>
+                            </div>
+                            <div style="background-color: #5820FF;">
+                                <li  id="settings-option" class="nav-item options-bar">
+                                    <span class="nav-link">Configurações</span>
+                                </li>
+                                <li id="leave-option" class="nav-item options-bar" >
+                                    <span class="nav-link">Sair</span>
+                                </li>
+                            </div>
+
                         </div>
+
+                       
                     </ul>
                 </div>
                 <main class="py-5 px-5 w-100 d-flex">
@@ -66,7 +71,7 @@
             </div>
         </div>
 
-        <script type="module" src="/js/__header.config.js"></script>
+        <script type="module" src="/js/pages/__header.config.js"></script>
         {% block scripts %}
            
         {% endblock %}

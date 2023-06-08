@@ -6,29 +6,26 @@ from services.forms_utils import *
 @jwt_required()
 def form_new_account():
     try:
-        useremail = get_jwt_identity()
-        user = DB_User.get_record_by_email(useremail) 
         fields = request.get_json()
 
-        if not fields_empty(fields):
-            account_exists = DB_Account.get_record_by_name(fields["account_name"], user["id"])
+        if fields_empty(fields):
+            raise Formulario.FaltouPreencherCamposObrigatorios
+        useremail = get_jwt_identity()
+        user = DB_User.get_record_by_email(useremail) 
+        account_exists = DB_Account.get_record_by_name(fields["account_name"], user["id"])
 
-            if not account_exists:
-                opening_balance = int(fields["opening_balance"]) 
-
-                DB_Account.insert_record(
-                    fields["account_name"],
-                    opening_balance,
-                    opening_balance,
-                    user["id"]
-                )
-                
-                response = jsonify({"status":200, "details":"Conta registrada."})
-            else:
-                response = jsonify({"status":250, "details":"Você já possui uma conta com esse nome."})    
-        else:
-            response = jsonify({"status":250, "details":"Faltou preencher campos obrigatórios."})
-
+        if account_exists:
+            raise Conta.NomeJaUtilizado
+    
+        DB_Account.insert_record(
+            fields["account_name"],
+            int(fields["opening_balance"]),
+            int(fields["opening_balance"]),
+            user["id"]
+        )
+            
+        response = jsonify({"status":200, "details":"Conta registrada."})
+   
     except Exception as error:
         response = jsonify({"status":777, "details":str(error)})
     

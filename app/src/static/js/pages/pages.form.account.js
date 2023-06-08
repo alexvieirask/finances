@@ -1,4 +1,4 @@
-import *  as __global from "./__utils.global.js"
+import *  as __global from "../utils/utils.global.js"
 
 const { Session, RedirectTo, MathConversions, Form } = __global
 

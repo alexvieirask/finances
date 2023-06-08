@@ -1,7 +1,7 @@
 {% extends "utils/_utils.templates_with_header.html" %}
     {% block head %}
         <title>Finances - Account</title>
-        <link rel="stylesheet" href="/css/account.css">
+        <link rel="stylesheet" href="/css/pages/pages.account.css">
     {% endblock %}
 
     {% block body %}
@@ -10,7 +10,7 @@
                 <div class="spinner"></div>
             </div>
             <div class="main-page" style="display: none;">
-                <h1 class="font-weight-bold">Contas</h1>  
+                <h1>Contas Financeiras</h1>  
                 <div class="my-4 d-flex  justify-content-between" style="flex-grow: 1;" >
                     <div class="py-5 px-5 square-container" style="margin-right: 5px;display: flex; flex-direction: column;">
                         <h4>Minhas Contas</h4>
@@ -30,9 +30,7 @@
                         <div style="margin-top: 15px;">
                             <p><strong>Obs.:</strong> O limite de contas exibidas são cinco.</p>
                         </div> 
-                        <div>
-                            <hr>
-                        </div>
+                   
                         <div style="flex-grow: 1; display: flex; align-items: flex-end; justify-content: flex-end;">
                             <button id="btn-more-details" class="btn w-100">Mais detalhes</button>
                         </div>
@@ -61,12 +59,12 @@
                     </div>
                 </div> 
                 <div class="d-flex">
-                    <button id="button-new-account" class="btn w-100">Nova Conta</button>
+                    <button id="button-new-account" onclick="RedirectTo.FormAccount()" class="btn w-100">Nova Conta</button>
                 </div>
             </div>
         </main>
     {% endblock %}
 
     {% block scripts %}
-        <script type="module" src="/js/pages.account.js"></script>
+        <script type="module" src="/js/pages/pages.account.js"></script>
     {% endblock %}

@@ -51,7 +51,7 @@ class DB_Postgres():
                 )
                 ''',
                 '''
-                CREATE TABLE IF NOT EXISTS "TransactionSimple" (
+                CREATE TABLE IF NOT EXISTS "Transaction" (
                     id SERIAL PRIMARY KEY,
                     amount INTEGER NOT NULL,
                     type INTEGER NOT NULL,

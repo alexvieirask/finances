@@ -15,8 +15,8 @@ class RedirectTo{
         window.location = "/account/details"
     }
     
-    static Transaction(){
-        window.location = "/transaction"
+    static TransactionSimple(){
+        window.location = "/transactionSimple"
     }
     
     static AccountsReceivable(){

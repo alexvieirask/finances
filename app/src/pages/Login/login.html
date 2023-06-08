@@ -1,7 +1,7 @@
 {% extends "utils/_utils.templates.html" %}
     {% block head %}
         <title>Finances</title>
-        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="/css/pages/pages.login.css">
     {% endblock %}
 
     {% block body %}
@@ -15,11 +15,11 @@
                         <input type="password" id="inputPassword" class="form-control " placeholder="Senha" >
                     </div>
                     
-                    <button class="btn btn-success btn-block" type="submit" id="submit-signin"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    <button class="btn btn-success btn-block" type="submit" id="submit-signin">Entrar</button>
                     <a  id="forgot_pswd">Esqueceu a senha?</a>
                     <hr>
 
-                    <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Criar Nova Conta</button>
+                    <button class="btn btn-primary btn-block" type="button" id="btn-signup">Criar Nova Conta</button>
                 </form>
 
                 <form class="form-reset">
@@ -41,8 +41,8 @@
                         <input type="password" id="user-pass" class="form-control " placeholder="Senha" required>
                         <input type="password" id="user-repeatpass" class="form-control " placeholder="Confirme a Senha" required>
                     </div>
-                    <button id="submit-signup" class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Registrar</button>
-                    <a  id="cancel_signup"><i class="fas fa-angle-left"></i> Voltar</a>
+                    <button id="submit-signup" class="btn btn-primary btn-block" type="submit"> Registrar</button>
+                    <a  id="cancel_signup">Voltar</a>
                 </form>
                 <br>
             </div>
@@ -51,5 +51,5 @@
     {% endblock %}
 
     {% block scripts %}
-        <script type="module" src="/js/pages.login.js"></script>
+        <script type="module" src="/js/pages/pages.login.js"></script>
     {% endblock %}

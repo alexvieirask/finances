@@ -1,5 +1,4 @@
-import *  as __global from "./__utils.global.js"
-
+import *  as __global from "../utils/utils.global.js"
 const { Session, Toastr,RedirectTo, Form } = __global
 
 document.querySelector("#logreg-forms #forgot_pswd").addEventListener("click",toggleResetPswd)

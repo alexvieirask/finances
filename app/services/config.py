@@ -43,12 +43,14 @@ jwt = JWTManager(app)
 cors = CORS(app)
 bcrypt = Bcrypt(app) 
 
+''' Importação Exceções '''
+from routes.exc import *
+
 ''' Importações Schemas '''
 from schemas.postgres import DB_Postgres, SYS_Postgres
 from schemas.user import DB_User, SYS_USER
 from schemas.tokenrp import DB_TokenRP, SYS_TokenRP
 from schemas.account import DB_Account
-
 
 ''' Inicialização banco de dados '''
 with app.app_context():

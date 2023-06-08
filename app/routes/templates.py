@@ -3,7 +3,7 @@ from services.config import *
 
 @app.route("/")
 def pages_login():
-    return render_template("pages/login.html")
+    return render_template("pages/Login/login.html")
 
 @app.route("/home")
 def pages_home():
@@ -11,15 +11,15 @@ def pages_home():
 
 @app.route("/account")
 def pages_account():
-    return render_template("pages/account.html")
+    return render_template("pages/Account/account.html")
 
 @app.route("/account/details")
 def pages_account_details():
-    return render_template("pages/account_details.html")
+    return render_template("pages/Account/account_details.html")
 
-@app.route("/transaction")
+@app.route("/transactionSimple")
 def pages_transaction():
-    return render_template("pages/transaction.html")
+    return render_template("pages/transactionSimple.html")
 
 @app.route("/accounts_payable")
 def pages_accounts_payable():
@@ -39,4 +39,4 @@ def pages_settings():
 
 @app.route("/new_account")
 def pages_form_account():
-    return render_template("pages/forms/form-account.html")
+    return render_template("pages/Account/account_form.html")
