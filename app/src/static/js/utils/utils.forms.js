@@ -23,6 +23,25 @@ class Form {
             console.log(error)
         }  
     }
+
+    static showErrorMessage(text,positionReference){
+        let span = document.createElement('span');
+        span.classList.add('form-span-error');
+        span.textContent = text;
+        
+        let posR = document.querySelector(positionReference);
+        posR.appendChild(span);
+     
+    }
+    static showSuccessMessage(text,positionReference){
+        let span = document.createElement('span');
+        span.classList.add('form-span-success');
+        span.textContent = text;
+        
+        let posR = document.querySelector(positionReference);
+        posR.appendChild(span);
+     
+    }
 }
 
 export { Form }

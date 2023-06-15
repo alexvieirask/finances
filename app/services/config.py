@@ -51,6 +51,7 @@ from schemas.postgres import DB_Postgres, SYS_Postgres
 from schemas.user import DB_User, SYS_USER
 from schemas.tokenrp import DB_TokenRP, SYS_TokenRP
 from schemas.account import DB_Account
+from schemas.generalregister import DB_GeneralRegister
 
 ''' Inicialização banco de dados '''
 with app.app_context():

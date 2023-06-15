@@ -62,7 +62,6 @@ class DB_Account():
             
             cur.execute(Q_max_current_amount)
             record = cur.fetchone()
-            
             if record:
                 record_to_dict = SYS_Postgres.record_to_dict(record,cur)
                 return record_to_dict

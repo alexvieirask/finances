@@ -1,0 +1,38 @@
+{% extends "utils/_utils.templates_with_header.html" %}
+    {% block head %}
+        <title>Finances - Cadastros Gerais</title>
+    {% endblock %}
+
+    {% block body %}
+        <main style="flex-grow: 1; display: flex; flex-direction: column;">
+            <h1>Cadastros Gerais</h1>
+            <div><hr></div>
+            <div class="justify-content-center d-flex mt-4">
+                <div class="d-flex flex-wrap my-5" style="justify-content: space-between;min-width: 980px;">
+                    <div class="icon d-flex flex-column align-items-center">
+                        <img id="categoria-icon" height="50" width="50" src="{{ url_for('static', filename='img/category.png') }}" alt="categoria-icon">
+                        <span>Categoria</span>
+                    </div>
+                  
+                    <div class="icon d-flex flex-column align-items-center">
+                        <img id="pessoa-icon" height="50" width="50" src="{{ url_for('static', filename='img/people.png') }}" alt="pessoa-icon">
+                        <span>Pessoa</span>
+                    </div>
+                  
+                    <div class="icon d-flex flex-column align-items-center">
+                        <img id="conta-icon" height="50" width="50" src="{{ url_for('static', filename='img/account.png') }}" alt="conta-icon">
+                        <span>Conta Financeira</span>
+                    </div>
+                  
+                    <div class="icon d-flex flex-column align-items-center">
+                        <img id="cartao_credito-icon" height="50" width="50" src="{{ url_for('static', filename='img/card_credit.png') }}" alt="cartao_credito-icon">
+                        <span>Cartão de Crédito</span>
+                    </div>
+                </div>    
+            </div>
+        </main>
+    {% endblock %}
+
+    {% block scripts %}
+        <script type="module" src="/js/pages/pages.generalRegister.js"></script>
+    {% endblock %}

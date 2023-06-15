@@ -1,0 +1,31 @@
+{% extends "utils/_utils.templates_with_header.html" %}
+    {% block head %}
+        <title>Finances - Cadastro de Pessoa</title>
+    {% endblock %}
+
+    {% block body %}
+        <main style="flex-grow: 1; display: flex; flex-direction: column;">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <h1>Cadastro de Categoria</h1>
+                <img class="icon-return-page" id="return-page" height="30" width="30" src="{{ url_for('static', filename='img/arrow-back.png') }}" alt="icone-return">
+            </div>
+            <div><hr></div>
+            <div class="d-flex" style="flex-grow: 1;" >
+                <form id="form-category" class="w-50">
+                    <div class="items-input">
+                        <div class="form-group mb-2">
+                            <label  class="mb-0" for="category-name">Identifique a Categoria</label>
+                            <input name="category-name" type="text" id="category-name" class="form-control" autofocus>
+                        </div>
+                    </div>
+                    <button id="send-form-category" type="submit" class="btn w-100">Adicionar</button>
+                </form>
+
+            </div>
+        </main>
+    {% endblock %}
+
+    {% block scripts %}
+        <script type="module" src="/js/pages/pages.form.category.js"></script>
+       
+    {% endblock %}

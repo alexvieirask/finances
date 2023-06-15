@@ -39,6 +39,21 @@ class RedirectTo{
         window.location = "/new_account"
     }
 
+    static GeneralRegister(){
+        window.location = "/general_register"
+    }
+    
+    static FormPeople(){
+        window.location = "/general_register/people "
+    }
+
+    static FormCategory(){
+        window.location = "/general_register/category "
+    }
+    
+    static ButtonRedirectOnClick(id_button,redirect_function,){
+        document.querySelector(`${id_button}`).addEventListener("click",redirect_function)
+    }
 }
 
 export { RedirectTo }

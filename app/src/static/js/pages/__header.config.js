@@ -2,14 +2,15 @@ import *  as __global from "../utils/utils.global.js"
 
 const { Session, RedirectTo } = __global
 
-document.querySelector("#home-option").addEventListener("click",RedirectTo.Home)
-document.querySelector("#account-option").addEventListener("click",RedirectTo.Account)
-document.querySelector("#transaction-option").addEventListener("click",RedirectTo.TransactionSimple)
-document.querySelector("#accountpayable-option").addEventListener("click",RedirectTo.AccountsPayable)
-document.querySelector("#accountreceivable-option").addEventListener("click",RedirectTo.AccountsReceivable)
-document.querySelector("#rebate-option").addEventListener("click",RedirectTo.Rebate)
-document.querySelector("#settings-option").addEventListener("click",RedirectTo.Settings)
-document.querySelector("#leave-option").addEventListener("click",Session.destroy)
+RedirectTo.ButtonRedirectOnClick("#home-option",RedirectTo.Home)
+RedirectTo.ButtonRedirectOnClick("#account-option",RedirectTo.Account)
+RedirectTo.ButtonRedirectOnClick("#transaction-option",RedirectTo.TransactionSimple)
+RedirectTo.ButtonRedirectOnClick("#accountpayable-option",RedirectTo.AccountsPayable)
+RedirectTo.ButtonRedirectOnClick("#accountreceivable-option",RedirectTo.AccountsReceivable)
+RedirectTo.ButtonRedirectOnClick("#rebate-option",RedirectTo.Rebate)
+RedirectTo.ButtonRedirectOnClick("#general-register-option",RedirectTo.GeneralRegister)
+RedirectTo.ButtonRedirectOnClick("#settings-option",RedirectTo.Settings)
+RedirectTo.ButtonRedirectOnClick("#leave-option",Session.destroy)
 
 async function setHeaderData(){
     try{

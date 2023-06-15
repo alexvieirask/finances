@@ -17,7 +17,7 @@ html,body{
 }
 
 .options-bar{
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid #1500d4;;
  
   color: #FFF;
 }
@@ -117,4 +117,8 @@ a{
 a:hover{
   color: black;
   text-decoration: none;
+}
+
+.icon{
+  cursor: pointer;
 }

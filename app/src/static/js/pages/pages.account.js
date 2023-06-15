@@ -4,15 +4,15 @@ import *  as api from "../api/api.accounts.js"
 const { RedirectTo, MathConversions, Loading } = __global
 const { convertMoneyIntegerToFloat } = MathConversions
 
-//document.querySelector("#button-new-account").addEventListener("click",RedirectTo.FormAccount)
-//document.querySelector("#btn-more-details").addEventListener("click",RedirectTo.AccountDetails)
+RedirectTo.ButtonRedirectOnClick("#button-new-account",RedirectTo.FormAccount)
+RedirectTo.ButtonRedirectOnClick("#btn-more-details",RedirectTo.AccountDetails)
 
 createTables()
 
 async function createTableAccounts(){
     try{
         var Tbody = document.querySelector("#t-body-accounts")
-        var table;
+        var table = ''
         var items = await api.get_all_accounts()
         const itemsExists = items.details.length > 0
 
@@ -36,19 +36,18 @@ async function createTableAccounts(){
 async function createTableMaxAmount(){
     try{
         var Tbody = document.querySelector("#t-body-max-amount")
-        var table;
+        var table = ''
             
         var item = await api.get_account_with_the_highest_balance()
-        var itemExists = item.details !== null
+        var itemExists =  item.details != null
         
         if (itemExists){
-                const { account_name, amount} = item.details
+                const {account_name, amount} = item.details
                 table = `
                     <tr> 
                         <td style="background-color:#f2f2f2;">${account_name}</td>
                         <td style="background-color:#f2f2f2;" class="font-weight-bold">R$ ${convertMoneyIntegerToFloat(amount)}</td>
                     </tr>`
-
         }
     }
     catch(error){

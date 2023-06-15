@@ -37,4 +37,23 @@ async function get_account_with_the_highest_balance(){
     }
 }
 
-export { get_all_accounts, get_account_with_the_highest_balance }
+async function insert_new_account(account_name, opening_balance){
+    const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/form/new_account`
+        
+    let response = await fetch(URL_REQUEST, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${Session.JWT}`
+        },
+        body:  JSON.stringify({
+            account_name        :       account_name,
+            opening_balance     :       MathConversions.convertMoneyFloatToInteger(opening_balance).toString()
+        })
+    });
+
+    return response.json()
+}
+
+
+export { get_all_accounts, get_account_with_the_highest_balance, insert_new_account }

@@ -1,35 +1,15 @@
 import *  as __global from "../utils/utils.global.js"
+import *  as api from "../api/api.accounts.js"
 
-const { RedirectTo, Session, MathConversions, Loading } = __global
-
-
-document.querySelector("#return-page").addEventListener("click",RedirectTo.Account)
-
-
+const { RedirectTo, Session, Loading } = __global
+RedirectTo.ButtonRedirectOnClick("#return-page",RedirectTo.Account)
 createTable()
-
-async function handleGetAccounts(){
-    try{
-        const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/user/info/all_accounts`
-        let response = await fetch(URL_REQUEST, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${Session.JWT}`
-            }
-        });      
-        return response.json()
-    }
-    catch(error){
-        console.log(error)
-    }
-} 
 
 async function createTableAccounts(){
     try{
         var Tbody = document.querySelector("#t-body-all-accounts")
-        var items = await handleGetAccounts()
-        var table;
+        var items = await api.get_all_accounts()
+        var table = ''
 
         const itemsExists = items.details.length > 0
 

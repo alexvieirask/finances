@@ -38,8 +38,9 @@ def account_max_amount():
         useremail = get_jwt_identity()
         user = DB_User.get_record_by_email(useremail) 
         account_with_max_amount = DB_Account.get_account_with_max_amount(user["id"])
-
+      
         response = jsonify({"status":200, "details": account_with_max_amount })
+     
 
     except Exception as error:
         response = jsonify({"status":777, "details":str(error)})

@@ -28,14 +28,18 @@ class DB_Postgres():
 
                     user_id INTEGER NOT NULL,
                     FOREIGN KEY (user_id) REFERENCES "User" (id),
-                     CONSTRAINT account_user_name_unique UNIQUE (user_id, name)
+                    CONSTRAINT account_user_name_unique UNIQUE (user_id, name)
                 )
                 ''',
                 '''
                 CREATE TABLE IF NOT EXISTS "Category" (
                     id SERIAL PRIMARY KEY,
                     name TEXT NOT NULL UNIQUE,
-                    register_date TIMESTAMP DEFAULT (current_timestamp)
+                    register_date TIMESTAMP DEFAULT (current_timestamp),
+                    
+                    user_id INTEGER NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES "User" (id),
+                    CONSTRAINT category_user_name_unique UNIQUE (user_id, name)
                 )
                 ''',
                 '''
@@ -71,7 +75,10 @@ class DB_Postgres():
                     name TEXT NOT NULL,
                     telephone INTEGER,
                     email TEXT UNIQUE,
-                    register_date TIMESTAMP DEFAULT (current_timestamp)
+                    register_date TIMESTAMP DEFAULT (current_timestamp),
+
+                    user_id INTEGER NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES "User" (id)
                 ) 
                 ''',
                 '''
@@ -171,7 +178,6 @@ class DB_Postgres():
             SYS_Postgres.log_transaction("get_tablenames",error)
         finally:
             connection.close()
-
         
     def get_all_records(tablename:str):
         try:

@@ -3,8 +3,8 @@ import *  as __global from "../utils/utils.global.js"
 const { Session, Form } = __global;
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("#form-transaction-simple").addEventListener("submit", handleAddNewTransactionSimple);
-    document.querySelector("#valor-transacao").addEventListener("input",Form.inputTypeNumber)
+    $("#form-transaction-simple").on("submit", handleAddNewTransactionSimple);
+    $("#valor-transacao").on("input",Form.inputTypeNumber)
     
     handleLoadingSelectize();
 
