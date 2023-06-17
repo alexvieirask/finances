@@ -1,9 +1,11 @@
 ''' Importações extras '''
 from datetime import datetime, timedelta
 import string, platform, random, os
+from services.secrets_data import *
 
-''' Importações postgres '''
+''' Importações banco de dados '''
 import psycopg2
+from services.connection_database import *
 
 ''' Importações Flask  '''
 from flask import Flask, render_template,jsonify, request, redirect, url_for, abort,send_file, make_response,send_from_directory
@@ -12,8 +14,7 @@ from flask_bcrypt import Bcrypt,generate_password_hash,check_password_hash
 from flask_caching import Cache, CachedResponse
 from flask_mail import Mail, Message
 
-''' Importações .env '''
-from services.env import *
+
 
 ''' Configurações Flask'''
 app = Flask(__name__, template_folder='../src', static_folder='../src/static')

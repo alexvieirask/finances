@@ -7,10 +7,7 @@ instance/
 *.sqlite
 *.db
 
-_secrets.py
+secrets_data.py
 _commands.py
 ## Logs
 *.log
-
-# Dev
-env.py
