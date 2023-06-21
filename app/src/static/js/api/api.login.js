@@ -1,7 +1,6 @@
 import *  as __global from "../utils/utils.global.js"
 const { Session } = __global
 
-
 async function signIn(useremail,userpassword){
     const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/signin/auth` 
     let response = await fetch(URL_REQUEST, {

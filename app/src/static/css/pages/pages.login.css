@@ -45,7 +45,7 @@
 #logreg-forms a{
     display: block;
     padding-top:10px;
-    color:lightseagreen;
+    color:#413bff;
     cursor: pointer;
 }
 #logreg-forms button[type="submit"]{ margin-top:10px; }

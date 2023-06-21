@@ -1,11 +1,8 @@
 import *  as __global from "../utils/utils.global.js"
 const { Session } = __global
 
-async function registerCategory(){
+async function insert_new_category(category_name){
     try{
-        var button = document.getElementById("send-form-category")
-        button.disabled = true;
-
         const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/general_register/form_category`
 
         let response = await fetch(URL_REQUEST,{
@@ -15,14 +12,11 @@ async function registerCategory(){
               'Authorization' : `Bearer ${Session.JWT}`
             },
             body:  JSON.stringify({
-                category_name        :       document.getElementById("category-name").value,
+                category_name        :       category_name
             })
         })
         
-
-        button.disabled = false;
         return await response.json()
-
 
     }
     catch(error){
@@ -30,4 +24,4 @@ async function registerCategory(){
     }
 }
 
-export { registerCategory }
+export { insert_new_category }

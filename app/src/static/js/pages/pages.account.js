@@ -11,9 +11,11 @@ createTables()
 
 async function createTableAccounts(){
     try{
+        const MAX_QUANTITY_ACCOUNT = 5
+
         var Tbody = document.querySelector("#t-body-accounts")
         var table = ''
-        var items = await api.get_all_accounts()
+        var items = await api.get_all_accounts(MAX_QUANTITY_ACCOUNT)
         const itemsExists = items.details.length > 0
 
         if (itemsExists){
