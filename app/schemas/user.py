@@ -52,7 +52,6 @@ class DB_User():
         finally:
             connection.close()
 
-
     def get_accounts_by_user_id(user_id:int,limit=0):
         try:
             connection = connect_database()
@@ -80,8 +79,6 @@ class DB_User():
             SYS_Postgres.log_transaction("get_accounts_by_user_id",error)
         finally:
             connection.close()
-
-
 
     def insert_record(fullname, username, email, password_hash):
         try:

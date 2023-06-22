@@ -52,7 +52,7 @@ class RedirectTo{
     }
     
     static ButtonRedirectOnClick(id_button,redirect_function,){
-        document.querySelector(`${id_button}`).addEventListener("click",redirect_function)
+        document.querySelector(id_button).addEventListener("click",redirect_function)
     }
 }
 

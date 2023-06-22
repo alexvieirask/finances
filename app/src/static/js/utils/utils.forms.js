@@ -20,6 +20,15 @@ class Form {
         form.reset()
     }
 
+    static inputTypeNumber(){
+        var valor = this.value
+        valor = valor.replace(/[^0-9.]/g, '')
+        valor = valor.replace(/(\..*?)\./g, '$1')
+        this.value = valor
+    }
+
+
+
     static async #BeforePost(event,formID){
         event.preventDefault()
         this.#disableButtonForm(formID)
@@ -27,13 +36,6 @@ class Form {
     static async #AfterPost(event,formID){
         event.preventDefault()
         this.#enableButtonForm(formID)
-    }
-
-    static inputTypeNumber(){
-        var valor = this.value
-        valor = valor.replace(/[^0-9.]/g, '')
-        valor = valor.replace(/(\..*?)\./g, '$1')
-        this.value = valor
     }
 
     static #disableButtonForm(formID){
@@ -81,13 +83,14 @@ class MessageInput{
             var errorMessage = document.querySelector(".form-span-error")
             var successMessage = document.querySelector(".form-span-success")
             
-            if (errorMessage && status == 2){
+            if (errorMessage        && status == 2){
                 errorMessage.classList.remove(...errorMessage.classList)
                 errorMessage.classList.add('form-span-success')
                 errorMessage.textContent = value
-            } else{
+            } 
+            else if (successMessage && status == 1){
                 successMessage.classList.remove(...successMessage.classList)
-                successMessage.classList.add('.form-span-erro')
+                successMessage.classList.add('form-span-error')
                 successMessage.textContent = value
             }
 

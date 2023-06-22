@@ -34,7 +34,7 @@ class DB_Postgres():
                 '''
                 CREATE TABLE IF NOT EXISTS "Category" (
                     id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL UNIQUE,
+                    name TEXT NOT NULL,
                     register_date TIMESTAMP DEFAULT (current_timestamp),
                     
                     user_id INTEGER NOT NULL,
@@ -286,10 +286,3 @@ class SYS_Postgres:
 
     def clear_pages_cache():
         cache.clear()
-
-    def list_error():
-        LIST_ERROR = {
-            "UNIQUE_CONSTRAINT" : "23505"
-        }
-
-        return LIST_ERROR

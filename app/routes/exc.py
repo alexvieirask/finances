@@ -16,7 +16,6 @@ class Formulario:
 
 
 class Usuario:
-    
     class EmailNaoEncontrado(Exception):
         def __init__(self):
             self.message = "E-mail não registrado no sistema."
@@ -80,6 +79,14 @@ class Conta:
     class NomeJaUtilizado(Exception):
             def __init__(self):
                 self.message = "Já existe uma conta registrada com esse nome."
+
+            def __str__(self):
+                return self.message
+
+class Categoria:
+    class NomeJaUtilizado(Exception):
+            def __init__(self):
+                self.message = "Já existe uma categoria registrada com esse nome."
 
             def __str__(self):
                 return self.message

@@ -4,7 +4,7 @@ const { Session } = __global
 async function insert_new_category(category_name){
     try{
         const URL_REQUEST = `http://${Session.IP_ADDRESS}:5000/general_register/form_category`
-
+        
         let response = await fetch(URL_REQUEST,{
             method: 'POST',
             headers: {
