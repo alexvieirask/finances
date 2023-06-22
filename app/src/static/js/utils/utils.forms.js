@@ -15,7 +15,7 @@ class Form {
         document.querySelector(formID).addEventListener("submit",processRequest)
     }
 
-    static onReset(formID){
+    static reset(formID){
         var form = document.querySelector(formID)
         form.reset()
     }
@@ -96,6 +96,11 @@ class MessageInput{
         catch(error){
             console.log(error)
         }
+    }
+
+    static reset(){
+        document.querySelector(".form-span-error")?.remove()
+        document.querySelector(".form-span-success")?.remove()
     }
 }
 

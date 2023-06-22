@@ -19,7 +19,7 @@ async function handleNewAccount(event){
             }
             else{
                 MessageInput.show(responseData.details, 2,'.items-input')
-                Form.onReset("#form-new-account")
+                Form.reset("#form-new-account")
             }
         })
 

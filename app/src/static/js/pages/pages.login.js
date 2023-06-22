@@ -24,7 +24,7 @@ function toggleResetPswd(){
 }
 function toggleSignUp(){
     try{
-        Form.resetResponsesMessages()
+        MessageInput.reset()
         $('#logreg-forms .form-signin').toggle(); 
         $('#logreg-forms .form-signup').toggle(); 
     }
@@ -62,7 +62,7 @@ async function handleSignup(event){
             }
             else{
                 Toastr.show('success','Conta criada com sucesso.')
-                $(".form-signup").reset()
+                Form.reset(".form-signup")
                 $('.form-signup').toggle() 
                 $('.form-signin').toggle() 
             }
